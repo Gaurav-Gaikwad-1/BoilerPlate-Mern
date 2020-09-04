@@ -24,7 +24,7 @@ app.use(cookieParser());
 
 //this is get request bcoz we do not put any data here
 //after logging in we need to get authenticated by website
-app.get('/api/user/auth',auth, (req,res)=>{
+app.get('/api/users/auth',auth, (req,res)=>{
     res.status(200).json({
         _id:req._id,
         isAuth: true,
@@ -35,7 +35,7 @@ app.get('/api/user/auth',auth, (req,res)=>{
     })
 })
 
-app.post('/api/user/register',(req,res) => {
+app.post('/api/users/register',(req,res) => {
     const user = new User(req.body);
 
     user.save((err,userData) => {                                             //we have to save this in mangodb after saving we can get either error ir user data 
@@ -53,7 +53,7 @@ app.post('/api/user/register',(req,res) => {
 //function def for comparePassword,generateToken is written in user.js
 //whenever user tries to login this route is called which returns | loginSucces:True | upon successful logging & generates a token which is stored in 'x_auth'
 // & then we do authorization check which is at route | api/user/auth |
-app.post('/api/user/login', (req,res) => {
+app.post('/api/users/login', (req,res) => {
     //find the email
     User.findOne({ email: req.body.email }, (err,user) => {
         if(!user)
@@ -93,7 +93,7 @@ app.post('/api/user/login', (req,res) => {
 //when athorizing the user with token,    in client we put that in cookie and in server we put that in database   so   we 
 //compare that token from cookie and database !   but  if we dont have a token inside the database,  that comparison will fail, 
 // so  it will be logged out
-app.get('api/user/logout',auth,(req,res) => {
+app.get('api/users/logout',auth,(req,res) => {
     User.findOneAndUpdate({_id:req.user._id},{ token:"" },(err,doc) => {              //here we need to find specific logged in user Id to let that acc kicked out of website
         if(err) return res.json({ success:false, err});
 

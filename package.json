@@ -4,8 +4,8 @@
   "description": "mern",
   "main": "index.js",
   "engines": {
-    "node":"12.16.3",
-    "npm":"6.14.4"
+    "node": "12.16.3",
+    "npm": "6.14.4"
   },
   "scripts": {
     "start": "node server/index.js",
@@ -16,6 +16,7 @@
   "dependencies": {
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
+    "concurrently": "^5.3.0",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -23,6 +24,7 @@
     "mongoose": "^5.10.0"
   },
   "devDependencies": {
+    "http-proxy-middleware": "^1.0.5",
     "nodemon": "^2.0.4"
   }
 }
